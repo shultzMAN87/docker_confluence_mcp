@@ -1,0 +1,10 @@
+services:
+  mcp-atlassian:
+    image: ghcr.io/sooperset/mcp-atlassian:latest
+    container_name: mcp-atlassian
+    restart: unless-stopped
+    env_file: .env
+    command: ["--transport", "streamable-http", "--stateless", "--port", "8010", "-vv"]
+    ports:
+      # только петля: эндпоинт без аутентификации, за ним лежит PAT
+      - "127.0.0.1:8010:8010"
