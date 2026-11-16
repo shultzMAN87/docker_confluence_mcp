@@ -1,6 +1,8 @@
 services:
   mcp-atlassian:
     image: ghcr.io/sooperset/mcp-atlassian:latest
+    networks:
+      - mcp_network
     container_name: mcp-atlassian
     restart: unless-stopped
     env_file: .env
@@ -8,3 +10,8 @@ services:
     ports:
       # только петля: эндпоинт без аутентификации, за ним лежит PAT
       - "127.0.0.1:8010:8010"
+
+networks:
+  mcp_network:
+    external: true
+    name: mcp-shared-network       
